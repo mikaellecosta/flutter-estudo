@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
+import './resposta.dart';
 
 main() {
   runApp(PerguntaApp());
@@ -21,38 +22,27 @@ class _PerguntaAppState extends State<PerguntaApp> {
       'Qual sua idade?',
     ];
 
-    return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        title: const Text("Quiz App - Mika"),
-      ),
-      body: Column(children: <Widget>[
-        Questao(perguntas[_perguntaSelecionada]),
-
-        ElevatedButton(
-          child: Text('Resposta 1'),
-          onPressed: _responder,
-        ),
-
-        ElevatedButton(
-          child: Text('Resposta 2'),
-          onPressed: _responder,
-        ),
-
-        ElevatedButton(
-          child: Text('Resposta 3'),
-          onPressed: _responder,
-        ),
-
-        ElevatedButton(
-          child: Text('Resposta 4'),
-          onPressed: _responder,
-        ),
-
-      ]
-      ),
-    )
+    final ThemeData tema = ThemeData(
+      brightness: Brightness.light,
     );
+
+    return MaterialApp(
+        theme: tema.copyWith(
+          colorScheme: tema.colorScheme.copyWith(
+              primary: Colors.deepOrange, secondary: Colors.deepPurple),
+        ),
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text("Quiz App - Mika"),
+          ),
+          body: Column(children: <Widget>[
+            Questao(perguntas[_perguntaSelecionada]),
+            Resposta('Resposta 1', _responder),
+            Resposta('Resposta 2', _responder),
+            Resposta('Resposta 3', _responder),
+            Resposta('Resposta 4', _responder),
+          ]),
+        ));
   }
 }
 
